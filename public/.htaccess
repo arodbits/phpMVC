@@ -1,0 +1,14 @@
+
+#Desactivate the MultiViews option. This prevents that "guessing" feature implemented by apache when a resource is not #found
+Options -MultiViews
+
+#Activating the mod_rewrite
+RewriteEngine On
+
+#Conditional rules. This means that if the request is different than a file or directory, then the Rule below will be #evaluated
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rule to be evaluated. The QSA means Request String Append and it assurance that the requested url will be followed.
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
